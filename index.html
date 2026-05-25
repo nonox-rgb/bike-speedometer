@@ -48,188 +48,6 @@
     }
 
     /* ───── TOP BAR ───── */
-    #topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    #leaderboard-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 8px;
-      background: var(--bg3);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      transition: border-color 0.2s;
-    }
-    #leaderboard-btn:active { border-color: var(--accent); }
-
-    #velo-points {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--bg3);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 5px 10px;
-    }
-    #velo-points-icon { font-size: 13px; }
-    #velo-points-value {
-      font-family: 'Orbitron', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.5px;
-    }
-
-    /* ───── LEADERBOARD OVERLAY ───── */
-    #lb-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      display: flex;
-      align-items: flex-end;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-    }
-    #lb-overlay.open { opacity: 1; pointer-events: all; }
-
-    #lb-panel {
-      width: 100%;
-      background: var(--bg2);
-      border-radius: 20px 20px 0 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 0 0 36px;
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-    }
-    #lb-overlay.open #lb-panel { transform: translateY(0); }
-
-    #lb-header {
-      padding: 16px 20px 12px;
-      flex-shrink: 0;
-    }
-    #lb-handle {
-      width: 36px; height: 4px;
-      background: rgba(255,255,255,0.2);
-      border-radius: 2px;
-      margin: 0 auto 16px;
-    }
-    #lb-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    #lb-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 14px; font-weight: 700;
-      letter-spacing: 3px; text-transform: uppercase;
-      color: var(--text-dim);
-    }
-    #lb-week {
-      font-size: 10px; font-weight: 600;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: var(--accent);
-      background: var(--accent-dim);
-      padding: 3px 9px; border-radius: 20px;
-    }
-
-    /* My rank card */
-    #lb-my-rank {
-      margin: 0 16px 12px;
-      background: var(--accent-dim);
-      border: 1px solid rgba(0,195,255,0.2);
-      border-radius: 14px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-    }
-    #lb-my-rank-num {
-      font-family: 'Orbitron', monospace;
-      font-size: 20px; font-weight: 900;
-      color: var(--accent);
-      min-width: 36px;
-    }
-    #lb-my-name {
-      flex: 1;
-      font-size: 14px; font-weight: 600;
-      color: var(--text);
-    }
-    #lb-my-points {
-      font-family: 'Orbitron', monospace;
-      font-size: 14px; font-weight: 700;
-      color: var(--accent);
-    }
-
-    /* List */
-    #lb-list {
-      overflow-y: auto;
-      flex: 1;
-      padding: 0 16px;
-      -webkit-overflow-scrolling: touch;
-    }
-    #lb-list::-webkit-scrollbar { display: none; }
-
-    .lb-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-    }
-    .lb-rank {
-      font-family: 'Orbitron', monospace;
-      font-size: 13px; font-weight: 700;
-      color: var(--text-dim);
-      min-width: 28px; text-align: center;
-    }
-    .lb-rank.gold { color: #ffd700; }
-    .lb-rank.silver { color: #c0c0c0; }
-    .lb-rank.bronze { color: #cd7f32; }
-
-    .lb-medal { font-size: 16px; min-width: 20px; text-align: center; }
-
-    .lb-name {
-      flex: 1;
-      font-size: 14px; font-weight: 600;
-      color: var(--text);
-    }
-    .lb-name.me { color: var(--accent); }
-
-    .lb-pts {
-      font-family: 'Orbitron', monospace;
-      font-size: 13px; font-weight: 700;
-      color: var(--text-dim);
-    }
-    .lb-pts.me { color: var(--accent); }
-
-    .lb-loading {
-      display: flex; align-items: center; justify-content: center;
-      padding: 40px; gap: 12px;
-      color: var(--text-dim); font-size: 12px;
-      letter-spacing: 2px; text-transform: uppercase;
-    }
-    .lb-spinner {
-      width: 20px; height: 20px;
-      border: 2px solid rgba(255,255,255,0.1);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-
     #topbar {
       display: flex;
       align-items: center;
@@ -404,7 +222,6 @@
       border: 1px solid rgba(255,255,255,0.08);
       position: relative;
       min-height: 90px;
-      z-index: 0;
     }
     #map {
       width: 100%; height: 100%;
@@ -736,7 +553,7 @@
 </head>
 <body>
   <!-- No GPS screen -->
-  <div id="no-gps-screen" class="hidden">
+  <div id="no-gps-screen">
     <div class="no-gps-icon">📍</div>
     <div class="no-gps-title">VéloCom</div>
     <div class="no-gps-msg">Active la localisation GPS pour démarrer le compteur.</div>
@@ -751,17 +568,11 @@
         <div id="gps-dot" class="searching"></div>
         <span id="gps-label">Recherche GPS...</span>
       </div>
-      <div id="topbar-right">
-        <div id="velo-points">
-          <span id="velo-points-icon">⚡</span>
-          <span id="velo-points-value">0</span>
-        </div>
-        <div id="leaderboard-btn" onclick="openLeaderboard()">🏆</div>
-        <div id="menu-btn" onclick="openMenu()">
-          <div class="menu-line"></div>
-          <div class="menu-line"></div>
-          <div class="menu-line"></div>
-        </div>
+      <div id="time-display">--:--</div>
+      <div id="menu-btn" onclick="openMenu()">
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
+        <div class="menu-line"></div>
       </div>
     </div>
 
@@ -876,27 +687,6 @@
     </div>
   </div>
 
-  <!-- Leaderboard overlay -->
-  <div id="lb-overlay" onclick="closeLBIfOutside(event)">
-    <div id="lb-panel">
-      <div id="lb-header">
-        <div id="lb-handle"></div>
-        <div id="lb-title-row">
-          <div id="lb-title">Classement</div>
-          <div id="lb-week">Cette semaine</div>
-        </div>
-      </div>
-      <div id="lb-my-rank" style="display:none;">
-        <div id="lb-my-rank-num">#—</div>
-        <div id="lb-my-name">—</div>
-        <div id="lb-my-points">0 pts</div>
-      </div>
-      <div id="lb-list">
-        <div class="lb-loading"><div class="lb-spinner"></div>Chargement...</div>
-      </div>
-    </div>
-  </div>
-
   <!-- Menu overlay -->
   <div id="menu-overlay" onclick="closeMenuIfOutside(event)">
     <div id="menu-panel">
@@ -924,7 +714,7 @@
       <div class="menu-section">
         <div class="menu-section-title">Options</div>
         <div id="max-speed-row">
-          <label>Vitesse max affichée (km/h)</label>
+           <label>Vitesse max affichée (km/h)</label>
           <input type="number" id="max-speed-input" value="60" min="30" max="120" onchange="updateMaxSpeed(this.value)" />
         </div>
         <div class="menu-toggle-row">
@@ -947,194 +737,10 @@
         </div>
       </div>
 
-      <!-- Account section -->
-      <div class="menu-section">
-        <div class="menu-section-title">Compte</div>
-        <div id="account-info" style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:12px;">
-          <div style="width:38px;height:38px;border-radius:50%;background:var(--accent-dim);border:1px solid var(--accent-dim);display:flex;align-items:center;justify-content:center;font-size:16px;">👤</div>
-          <div>
-            <div id="account-name" style="font-size:14px;font-weight:600;color:var(--text);">—</div>
-            <div id="account-email" style="font-size:11px;color:var(--text-dim);">—</div>
-          </div>
-        </div>
-        <button onclick="window.location.href='rides.html'" style="width:100%;padding:12px;border-radius:10px;background:var(--bg3);border:1px solid rgba(255,255,255,0.07);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;margin-bottom:8px;text-align:left;display:flex;align-items:center;gap:10px;">
-          <span>🚴</span> Mes trajets
-        </button>
-        <button id="logout-btn" onclick="doLogout()" style="width:100%;padding:12px;border-radius:10px;background:rgba(224,32,32,0.06);border:1px solid rgba(224,32,32,0.15);color:#e02020;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;">
-          Se déconnecter
-        </button>
-      </div>
-
       <button class="close-menu-btn" onclick="closeMenu()">Fermer</button>
     </div>
   </div>
 
   <script src="app.js"></script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-    import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { FIREBASE_CONFIG } from "./firebase-config.js";
-
-    const app = initializeApp(FIREBASE_CONFIG);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
-
-    onAuthStateChanged(auth, user => {
-      if (!user) { window.location.href = "login.html"; return; }
-      window._currentUser = user;
-      document.getElementById("account-name").textContent = user.displayName || "Cycliste";
-      document.getElementById("account-email").textContent = user.email;
-      loadMyPoints();
-    });
-
-    window.doLogout = async function() {
-      try {
-        closeMenu();
-        await signOut(auth);
-      } catch(e) {}
-      localStorage.removeItem("velocom_user");
-      window.location.href = "login.html";
-    };
-
-    window.saveRideToFirestore = async function(rideData) {
-      if (!window._currentUser) return;
-      try {
-        await addDoc(collection(db, "rides"), {
-          uid: window._currentUser.uid,
-          ...rideData,
-        });
-        // Compute and add VéloPoints for this ride
-        const pts = computePoints(rideData.distance, rideData.maxSpeed);
-        await addVeloPoints(pts);
-      } catch(e) {
-        console.warn("Erreur sauvegarde trajet:", e);
-      }
-    };
-
-    // ── Points formula: 1pt per 100m + maxSpeed bonus ──
-    function computePoints(distKm, maxSpeed) {
-      const distPts = Math.floor(distKm * 10); // 1pt per 100m
-      const speedBonus = Math.floor(maxSpeed || 0); // 1pt per km/h of max speed
-      return distPts + speedBonus;
-    }
-
-    // ── Get Monday of current week as string key ──
-    function getWeekKey() {
-      const now = new Date();
-      const day = now.getDay(); // 0=Sun
-      const diff = (day === 0 ? -6 : 1 - day);
-      const monday = new Date(now);
-      monday.setDate(now.getDate() + diff);
-      return monday.toISOString().slice(0, 10); // "2025-05-19"
-    }
-
-    // ── Add points to Firestore leaderboard ──
-    async function addVeloPoints(pts) {
-      if (!window._currentUser) return;
-      const { getDoc, setDoc, updateDoc, increment } = await import("https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js");
-      const weekKey = getWeekKey();
-      const docId = window._currentUser.uid + '_' + weekKey;
-      const ref = doc(db, "leaderboard", docId);
-      const snap = await getDoc(ref);
-      if (snap.exists()) {
-        await updateDoc(ref, { points: increment(pts) });
-      } else {
-        await setDoc(ref, {
-          uid: window._currentUser.uid,
-          username: window._currentUser.displayName || 'Cycliste',
-          weekKey,
-          points: pts,
-        });
-      }
-      // Update local display
-      const newPts = (snap.exists() ? (snap.data().points || 0) : 0) + pts;
-      document.getElementById('velo-points-value').textContent = newPts;
-      window._myPoints = newPts;
-    }
-
-    // ── Load leaderboard ──
-    window.loadLeaderboard = async function() {
-      const { query, where, orderBy, limit, getDocs } = await import("https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js");
-      const weekKey = getWeekKey();
-      const list = document.getElementById('lb-list');
-      list.innerHTML = '<div class="lb-loading"><div class="lb-spinner"></div>Chargement...</div>';
-
-      try {
-        const q = query(
-          collection(db, "leaderboard"),
-          where("weekKey", "==", weekKey),
-          orderBy("points", "desc"),
-          limit(50)
-        );
-        const snap = await getDocs(q);
-        const rows = snap.docs.map(d => d.data());
-        renderLeaderboard(rows);
-      } catch(e) {
-        list.innerHTML = '<div class="lb-loading">Erreur de chargement</div>';
-      }
-    };
-
-    function renderLeaderboard(rows) {
-      const list = document.getElementById('lb-list');
-      const myUid = window._currentUser?.uid;
-      const medals = ['🥇','🥈','🥉'];
-      const rankClasses = ['gold','silver','bronze'];
-
-      // Find my rank
-      const myIdx = rows.findIndex(r => r.uid === myUid);
-      const myRankEl = document.getElementById('lb-my-rank');
-      if (myIdx >= 0) {
-        myRankEl.style.display = 'flex';
-        document.getElementById('lb-my-rank-num').textContent = '#' + (myIdx + 1);
-        document.getElementById('lb-my-name').textContent = rows[myIdx].username;
-        document.getElementById('lb-my-points').textContent = rows[myIdx].points + ' pts';
-      } else if (window._myPoints > 0) {
-        myRankEl.style.display = 'flex';
-        document.getElementById('lb-my-rank-num').textContent = '#' + (rows.length + 1);
-        document.getElementById('lb-my-name').textContent = window._currentUser?.displayName || 'Toi';
-        document.getElementById('lb-my-points').textContent = (window._myPoints || 0) + ' pts';
-      }
-
-      if (rows.length === 0) {
-        list.innerHTML = '<div class="lb-loading">Aucun cycliste cette semaine 🚴</div>';
-        return;
-      }
-
-      list.innerHTML = '';
-      rows.forEach((row, i) => {
-        const isMe = row.uid === myUid;
-        const div = document.createElement('div');
-        div.className = 'lb-row';
-        div.innerHTML = \`
-          <div class="lb-rank \${rankClasses[i] || ''}">\${i < 3 ? '' : '#' + (i+1)}</div>
-          <div class="lb-medal">\${medals[i] || ''}</div>
-          <div class="lb-name \${isMe ? 'me' : ''}">\${row.username}\${isMe ? ' (toi)' : ''}</div>
-          <div class="lb-pts \${isMe ? 'me' : ''}">\${row.points} pts</div>
-        \`;
-        list.appendChild(div);
-      });
-    }
-
-    // ── Load my current week points on startup ──
-    async function loadMyPoints() {
-      if (!window._currentUser) return;
-      const { getDoc } = await import("https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js");
-      const weekKey = getWeekKey();
-      const docId = window._currentUser.uid + '_' + weekKey;
-      try {
-        const snap = await getDoc(doc(db, "leaderboard", docId));
-        if (snap.exists()) {
-          const pts = snap.data().points || 0;
-          window._myPoints = pts;
-          document.getElementById('velo-points-value').textContent = pts;
-        }
-      } catch(e) {}
-    }
-
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
-    }
-  </script>
 </body>
 </html>
