@@ -1,7 +1,6 @@
 // ───── STATE ─────
 const state = {
   riding: false,
-  rideStartedAt: null,
   speed: 0,
   maxSpeed: 0,
   avgSpeed: 0,
@@ -33,19 +32,9 @@ let lastLimitFetchPos = null;
 
 // ───── INIT ─────
 document.addEventListener('DOMContentLoaded', () => {
-  // Hide no-gps screen by default, show only on error
-  document.getElementById('no-gps-screen').classList.add('hidden');
-
   updateClock();
   setInterval(updateClock, 1000);
-
-  // Wait for fonts before generating ticks
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => generateTicks());
-  } else {
-    setTimeout(generateTicks, 500);
-  }
-
+  generateTicks();
   initMap();
 
   // Load prefs
@@ -66,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch(e) {}
   }
 
-  // Auto-start GPS silently
   initGPS();
 });
 
@@ -118,11 +106,6 @@ function initMap() {
   }).addTo(map);
 
   state.mapReady = true;
-
-  // Force map to render correctly after layout
-  setTimeout(() => {
-    map.invalidateSize();
-  }, 300);
 }
 
 function updateMap(lat, lon) {
@@ -138,6 +121,8 @@ function updateMap(lat, lon) {
 
 // ───── GPS ─────
 function initGPS() {
+  document.getElementById('no-gps-screen').classList.add('hidden');
+
   if (!navigator.geolocation) {
     showNoGPS('Ton navigateur ne supporte pas la géolocalisation.');
     return;
@@ -145,11 +130,6 @@ function initGPS() {
 
   document.getElementById('gps-dot').className = 'searching';
   document.getElementById('gps-label').textContent = 'Recherche GPS...';
-
-  // Clear previous watcher if any
-  if (state.watchId !== null) {
-    navigator.geolocation.clearWatch(state.watchId);
-  }
 
   state.watchId = navigator.geolocation.watchPosition(
     onGPSUpdate,
@@ -169,6 +149,7 @@ function onGPSUpdate(pos) {
   // GPS acquired
   if (!state.gpsReady) {
     state.gpsReady = true;
+    document.getElementById('no-gps-screen').classList.add('hidden');
     document.getElementById('gps-dot').className = 'active';
     document.getElementById('gps-label').textContent =
       'GPS ±' + Math.round(accuracy) + 'm';
@@ -384,41 +365,19 @@ function toggleRide() {
   const btn = document.getElementById('ride-btn');
 
   if (state.riding) {
-    if (!state.rideStartedAt) state.rideStartedAt = new Date().toISOString();
     btn.textContent = 'Pause';
     btn.style.borderColor = 'var(--warn)';
     btn.style.color = 'var(--warn)';
     btn.style.background = 'rgba(255,107,0,0.05)';
-    if (!pathCoords.length) { pathCoords = []; pathLine.setLatLngs([]); }
+    pathCoords = [];
+    pathLine.setLatLngs([]);
     requestWakeLock();
   } else {
     btn.textContent = 'Reprendre';
     btn.style.borderColor = '';
     btn.style.color = '';
     btn.style.background = '';
-    // Auto-save on pause if meaningful ride
-    if (state.distance > 0.01) saveRide();
   }
-}
-
-function saveRide() {
-  const rideData = {
-    startedAt: state.rideStartedAt || new Date().toISOString(),
-    distance: parseFloat(state.distance.toFixed(3)),
-    avgSpeed: parseFloat(state.avgSpeed.toFixed(1)),
-    maxSpeed: parseFloat(state.maxSpeed.toFixed(1)),
-    duration: Math.round(state.totalTime),
-  };
-  let attempts = 0;
-  const tryave = () => {
-    if (typeof window.saveRideToFirestore === 'function') {
-      window.saveRideToFirestore(rideData);
-    } else if (attempts < 10) {
-      attempts++;
-      setTimeout(tryave, 500);
-    }
-  };
-  tryave();
 }
 
 function resetTrip() {
@@ -428,7 +387,6 @@ function resetTrip() {
   state.totalTime = 0;
   state.speedHistory = [];
   state.riding = false;
-  state.rideStartedAt = null;
   pathCoords = [];
   if (pathLine) pathLine.setLatLngs([]);
 
@@ -528,27 +486,9 @@ function updateMaxSpeed(val) {
 // ───── MENU ─────
 function openMenu() {
   document.getElementById('menu-overlay').classList.add('open');
-  document.getElementById('map-panel').style.visibility = 'hidden';
 }
 function closeMenu() {
   document.getElementById('menu-overlay').classList.remove('open');
-  document.getElementById('map-panel').style.visibility = 'visible';
-  // Force map redraw after menu close
-  if (map) setTimeout(() => map.invalidateSize(), 50);
-}
-
-function openLeaderboard() {
-  document.getElementById('lb-overlay').classList.add('open');
-  document.getElementById('map-panel').style.visibility = 'hidden';
-  if (typeof window.loadLeaderboard === 'function') window.loadLeaderboard();
-}
-function closeLeaderboard() {
-  document.getElementById('lb-overlay').classList.remove('open');
-  document.getElementById('map-panel').style.visibility = 'visible';
-  if (map) setTimeout(() => map.invalidateSize(), 50);
-}
-function closeLBIfOutside(e) {
-  if (e.target === document.getElementById('lb-overlay')) closeLeaderboard();
 }
 function closeMenuIfOutside(e) {
   if (e.target === document.getElementById('menu-overlay')) closeMenu();
